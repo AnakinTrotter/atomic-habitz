@@ -1,26 +1,26 @@
 import {
   StyleSheet,
   Text,
+  SafeAreaView,
   View,
   TextInput,
   TouchableOpacity,
 } from "react-native";
 import { COLORS } from "../constants/colors";
+import UserProfileView from '../components/UserProfileView.js'
 
 const Profile = ({ navigation }) => {
   return (
-    <View style={styles.container} >
-      <Text>Hello this is the profile screen :)</Text>
-    </View>
+    <SafeAreaView style={styles.container} >
+      <UserProfileView />
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: COLORS.background
   },
 });
 
