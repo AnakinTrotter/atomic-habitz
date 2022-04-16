@@ -6,21 +6,21 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-function ProfileScreen(props) {
+const Home = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text>Hi this is the profile screen</Text>
+    <View style={styles.container} >
+      <Text>Hello this is the home screen :)</Text>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "red",
+    backgroundColor: "green",
     alignItems: "center",
     justifyContent: "center",
   },
 });
 
-export default ProfileScreen;
+export default Home;

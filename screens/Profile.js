@@ -6,21 +6,21 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-function FriendsScreen(props) {
+const Profile = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text>This is the friends screen</Text>
+    <View style={styles.container} >
+      <Text>Hello this is the profile screen :)</Text>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "yellow",
+    backgroundColor: "red",
     alignItems: "center",
     justifyContent: "center",
   },
 });
 
-export default FriendsScreen;
+export default Profile;
