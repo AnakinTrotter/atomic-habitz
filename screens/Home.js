@@ -3,12 +3,14 @@ import {
   SafeAreaView,
   View,
   TextInput,
+  Text,
   TouchableOpacity,
 } from "react-native";
 
 import HomeHeaderView from "../components/HomeHeaderView.js";
 import { COLORS } from "../constants/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import HabitStackView from "../components/HabitCardView.js";
 
 function Home(props) {
   // the HomeHeaderView is for testing rn
@@ -16,8 +18,18 @@ function Home(props) {
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
         <HomeHeaderView style={styles.header} />
+        <HabitStackView habits={["one", "two", "three"]} />
       </View>
       <TouchableOpacity
+        style={{
+          height: 80,
+          width: 80,
+          borderRadius: 80,
+          justifyContent: "center",
+          marginBottom: 30,
+          marginRight: 30,
+          alignSelf: "flex-end",
+        }}
         onPress={() => {
           console.log("Button pressed");
         }}
@@ -55,8 +67,6 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 30,
-    marginRight: 30,
   },
 });
 
