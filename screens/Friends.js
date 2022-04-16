@@ -5,23 +5,24 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import HabitStackView from "../components/HabitCardView";
 
-function HomeScreen(props) {
+import { COLORS } from '../constants/colors'
+
+const Friends = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text>Hi this is the home screen</Text>
-      <HabitStackView habits={["1", "2", "3"]} />
+    <View style={styles.container} >
+      <Text>Hello this is the friends screen :)</Text>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.background,
     alignItems: "center",
     justifyContent: "center",
   },
 });
 
-export default HomeScreen;
+export default Friends;

@@ -1,42 +1,25 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
-import HomeScreen from "./screens/HomeScreen";
-import FriendsScreen from "./screens/FriendsScreen";
-import ProfileScreen from "./screens/ProfileScreen";
+import RootNavigator from "./navigation/RootNavigator";
+import {
+  useFonts,
+  NotoSans_400Regular,
+  NotoSans_400Regular_Italic,
+  NotoSans_700Bold,
+  NotoSans_700Bold_Italic,
+} from "@expo-google-fonts/noto-sans";
+import AppLoading from "expo-app-loading";
 
 export default function App() {
-  const Stack = createStackNavigator();
+  let [fontsLoaded] = useFonts({
+    NotoSans_400Regular,
+    NotoSans_700Bold
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="FriendsScreen"
-          component={FriendsScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ProfileScreen"
-          component={ProfileScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <RootNavigator />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
