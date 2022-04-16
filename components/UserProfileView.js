@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { FONT } from '../constants/font.js'
+import { COLORS } from '../constants/colors.js'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const UserProfileView = () => {
@@ -25,10 +26,20 @@ const UserProfileView = () => {
 
     return (
         <View style={styles.container}>
-            <Icon name='account-circle' size='96' />
-            <Text style={FONT.h1b}>{data.name}</Text>
-            <Text style={FONT.p1}>{data.desc}</Text>
-            <Text style={FONT.p1b}>HIGHEST STREAK: {data.best}🔥</Text>
+            <Icon style={styles.settingsIcon} color='gray' name='cog'size='48' />
+            <Icon name='account-circle' color={COLORS.brown} size='96' />
+            <View style={styles.nameText}>
+                <Text style={FONT.h1b}>{data.name}</Text>
+            </View>
+            <View style={styles.divider}></View>
+            <View style={styles.textBox}>
+                <Text style={FONT.p1}>{data.desc}</Text>
+            </View>
+            <View style={styles.divider}></View>
+            <View style={styles.textBox}>
+                <Text style={FONT.p1b}>HIGHEST STREAK: {data.best}🔥</Text>
+            </View>
+            <View style={styles.divider}></View>
         </View>
     );
 }
@@ -38,6 +49,24 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center'
     },
+    divider: {
+        width: 279,
+        height: 2,
+        backgroundColor: COLORS.secondary
+    },
+    textBox: {
+        width: 225,
+        paddingTop: 10,
+        paddingBottom: 10,
+    },
+    nameText: {
+        marginBottom: 10,
+    },
+    settingsIcon: {
+        position: 'absolute',
+        right: 10,
+        top: 10
+    }
 });
 
 export default UserProfileView;
