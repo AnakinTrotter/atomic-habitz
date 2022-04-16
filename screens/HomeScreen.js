@@ -9,6 +9,7 @@ import {
 import HomeHeaderView from "../components/HomeHeaderView.js";
 import { COLORS } from "../constants/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 function HomeScreen(props) {
   // the HomeHeaderView is for testing rn
@@ -23,7 +24,7 @@ function HomeScreen(props) {
         }}
       >
         <View style={styles.add}>
-          <Icon size={60} name="plus" />
+          <Icon size={70} style={{ color: COLORS.primary }} name="plus" />
         </View>
       </TouchableOpacity>
     </SafeAreaView>
