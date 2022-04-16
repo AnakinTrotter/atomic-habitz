@@ -5,29 +5,30 @@ import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "./screens/HomeScreen";
 import FriendsScreen from "./screens/FriendsScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 export default function App() {
-  const Stack = createStackNavigator();
+  const AppBottomTabs = createBottomTabNavigator();
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
+      <AppBottomTabs.Navigator>
+        <AppBottomTabs.Screen
           name="HomeScreen"
           component={HomeScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
+        <AppBottomTabs.Screen
           name="FriendsScreen"
           component={FriendsScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
+        <AppBottomTabs.Screen
           name="ProfileScreen"
           component={ProfileScreen}
           options={{ headerShown: false }}
         />
-      </Stack.Navigator>
+      </AppBottomTabs.Navigator>
     </NavigationContainer>
   );
 }
