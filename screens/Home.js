@@ -9,7 +9,6 @@ import {
 import HomeHeaderView from "../components/HomeHeaderView.js";
 import { COLORS } from "../constants/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
 function Home(props) {
   // the HomeHeaderView is for testing rn

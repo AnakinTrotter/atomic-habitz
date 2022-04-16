@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import { COLORS } from '../constants/colors'
+
 const Friends = ({ navigation }) => {
   return (
     <View style={styles.container} >
@@ -17,7 +19,7 @@ const Friends = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "yellow",
+    backgroundColor: COLORS.background,
     alignItems: "center",
     justifyContent: "center",
   },

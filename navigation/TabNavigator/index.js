@@ -37,20 +37,21 @@ const TabNavigator = () => {
       screenOptions={({route}) => ({
         tabBarIcon: ({color}) => Options(route, color),
         tabBarActiveTintColor: COLORS.secondary,
-        tabBarInactiveTintColor: COLORS.secondary,
-        tabBarActiveBackgroundColor: COLORS.accent,
-        tabBarInactiveBackgroundColor: COLORS.primary,
+        tabBarInactiveTintColor: COLORS.grey,
         tabBarStyle: [
           {
-            "display": "flex"
+            "display": "flex",
+            "paddingBottom": 5,
+            "backgroundColor": COLORS.primary,
           },
           null
-        ]
+        ],
+        headerShown: false
       })}
       tabBar={(props) => <CustomTabBar {...props} />}>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Friends" component={Friends} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Home" component={Home}/>
+      <Tab.Screen name="Friends" component={Friends}/>
+      <Tab.Screen name="Profile" component={Profile}/>
     </Tab.Navigator>
   );
 };

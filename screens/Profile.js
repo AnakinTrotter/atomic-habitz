@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { COLORS } from "../constants/colors";
 
 const Profile = ({ navigation }) => {
   return (
@@ -17,7 +18,7 @@ const Profile = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "red",
+    backgroundColor: COLORS.background,
     alignItems: "center",
     justifyContent: "center",
   },
