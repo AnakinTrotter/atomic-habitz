@@ -13,6 +13,7 @@ import AppLoading from "expo-app-loading";
 export default function App() {
   let [fontsLoaded] = useFonts({
     NotoSans_400Regular,
+    NotoSans_700Bold
   });
 
   if (!fontsLoaded) {

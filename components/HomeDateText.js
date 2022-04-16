@@ -1,10 +1,17 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 
+const HomeDateText = () => {
+  return (
+    <Text style={styles.dateText}>{getDate()}</Text>
+  );
+}
+
 const styles = StyleSheet.create({
   dateText: {
     fontSize: 18,
-    fontWeight: "bold"
+    fontFamily: "NotoSans_700Bold",
+    marginTop: 5
   }
 });
 
@@ -14,12 +21,6 @@ const getDate = () => {
 
   let now = new Date();
   return `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}th`;
-}
-
-const HomeDateText = () => {
-  return (
-    <Text style={styles.dateText}>{getDate()}</Text>
-  );
 }
 
 export default HomeDateText;

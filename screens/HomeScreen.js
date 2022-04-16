@@ -1,32 +1,37 @@
 import {
   StyleSheet,
-  Text,
+  SafeAreaView,
   View,
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { COLORS } from "../constants/colors";
-import { FONT } from "../constants/font";
 
-import HomeHeaderView from "../components/HomeHeaderView.js";
+import HomeHeaderView from '../components/HomeHeaderView.js'
+import { COLORS } from '../constants/colors'
 
 function HomeScreen(props) {
   // the HomeHeaderView is for testing rn
   return (
-    <View style={styles.container}>
-      <Text style={FONT.h1}>Hi this is the home screen</Text>
-      <Text style={FONT.p1}>Noto Sans font</Text>
-    </View>
+    <SafeAreaView style={styles.safeContainer}>
+      <View style={styles.container}>
+        <HomeHeaderView style={styles.header} />
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeContainer: {
+    flex: 1,
+    backgroundColor: COLORS.background
+  },
   container: {
     flex: 1,
-    backgroundColor: COLORS.primary,
-    alignItems: "center",
-    justifyContent: "center",
+    padding: 30
   },
+  header: {
+    flex: 1
+  }
 });
 
 export default HomeScreen;
