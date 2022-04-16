@@ -10,38 +10,6 @@ function ProfileScreen(props) {
   return (
     <View style={styles.container}>
       <Text>Hi this is the profile screen</Text>
-      <TouchableOpacity
-        onPress={() => {
-          props.navigation.navigate("HomeScreen");
-        }}
-      >
-        <Text
-          style={{
-            backgroundColor: "blue",
-            color: "white",
-            padding: 10,
-            marginTop: 20,
-          }}
-        >
-          Go to Home Screen
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          props.navigation.navigate("FriendsScreen");
-        }}
-      >
-        <Text
-          style={{
-            backgroundColor: "blue",
-            color: "white",
-            padding: 10,
-            marginTop: 20,
-          }}
-        >
-          Go to Friends Screen
-        </Text>
-      </TouchableOpacity>
     </View>
   );
 }
