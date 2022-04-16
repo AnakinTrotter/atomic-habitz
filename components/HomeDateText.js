@@ -10,7 +10,7 @@ const HomeDateText = () => {
 const styles = StyleSheet.create({
   dateText: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontFamily: "NotoSans_700Bold",
     marginTop: 5
   }
 });
