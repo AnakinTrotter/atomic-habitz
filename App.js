@@ -1,7 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
 import RootNavigator from "./navigation/RootNavigator";
-import { NavigationContainer } from "@react-navigation/native";
-import BottomTab from "./navigation/BottomTab";
 import {
   useFonts,
   NotoSans_400Regular,

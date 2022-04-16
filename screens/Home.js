@@ -11,7 +11,7 @@ import { COLORS } from "../constants/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
-function HomeScreen(props) {
+function Home(props) {
   // the HomeHeaderView is for testing rn
   return (
     <SafeAreaView style={styles.safeContainer}>
