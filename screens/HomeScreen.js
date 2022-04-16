@@ -8,6 +8,7 @@ import {
 
 import HomeHeaderView from "../components/HomeHeaderView.js";
 import { COLORS } from "../constants/colors";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 function HomeScreen(props) {
   // the HomeHeaderView is for testing rn
@@ -17,11 +18,14 @@ function HomeScreen(props) {
         <HomeHeaderView style={styles.header} />
       </View>
       <TouchableOpacity
-        style={styles.add}
         onPress={() => {
           console.log("Button pressed");
         }}
-      ></TouchableOpacity>
+      >
+        <View style={styles.add}>
+          <Icon size={60} name="plus" />
+        </View>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -43,12 +47,16 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
     borderRadius: 80,
-    marginRight: 10,
     backgroundColor: "white",
     shadowColor: "#171717",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
+    alignSelf: "flex-end",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 30,
+    marginRight: 30,
   },
 });
 
