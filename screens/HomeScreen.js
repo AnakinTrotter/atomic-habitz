@@ -6,9 +6,13 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import HomeHeaderView from '../components/HomeHeaderView.js'
+
 function HomeScreen(props) {
+  // the HomeHeaderView is for testing rn
   return (
     <View style={styles.container}>
+      <HomeHeaderView />
       <Text>Hi this is the home screen</Text>
     </View>
   );
