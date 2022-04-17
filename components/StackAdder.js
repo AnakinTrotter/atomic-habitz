@@ -1,11 +1,21 @@
 import React from 'react'
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import HomeDateText from './HomeDateText';
 import { FONT } from '../constants/font.js';
 import { COLORS } from "../constants/colors";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+const styles = StyleSheet.create({
+    inputSimpleBorder:{
+        marginTop: 15,
+        backgroundColor: "white",
+        borderWidth: 1,
+        borderColor: COLORS.primary,
+        padding: 10,
+        fontSize: 20
+    },
+  });
 
 function StackCreator({ setAddingHabit, setAddingStack }) {
     return (
@@ -16,8 +26,8 @@ function StackCreator({ setAddingHabit, setAddingStack }) {
                 </View>
             </TouchableOpacity>
             <Text style={ FONT.h1b }>Stack Adder</Text>
-            <TextInput size={30} placeholder="Stack Name"/>
-            <TextInput size={30} placeholder="Time To Begin Stack"/>
+            <TextInput style={styles.inputSimpleBorder} size={30} placeholder="Stack Name"/>
+            <TextInput style={styles.inputSimpleBorder} size={30} placeholder="Time To Begin Stack"/>
         </View>
     );
 }

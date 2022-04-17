@@ -1,9 +1,9 @@
-import { View, Button, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { View, Button, StyleSheet, TouchableOpacity, Text, SafeAreaView } from "react-native";
 import { COLORS } from "../constants/colors";
 
 const AppButton = ({ onPress, title }) => (
     <TouchableOpacity onPress={onPress} style={styles.appButtonContainer}>
-      <Text style={styles.appButtonText}>{title}</Text>
+        <Text style={styles.appButtonText}>{title}</Text>
     </TouchableOpacity>
   );
 
@@ -13,7 +13,8 @@ const AppButton = ({ onPress, title }) => (
       backgroundColor: COLORS.tertiary,
       borderRadius: 5,
       paddingVertical: 10,
-      paddingHorizontal: 5
+      paddingHorizontal: 5,
+      marginBottom: 5,
     },
     appButtonText: {
       fontSize: 18,
