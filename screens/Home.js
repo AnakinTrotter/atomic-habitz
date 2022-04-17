@@ -5,20 +5,36 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
+  FlatList,
 } from "react-native";
 
 import HomeHeaderView from "../components/HomeHeaderView.js";
 import { COLORS } from "../constants/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import HabitStackView from "../components/HabitCardView.js";
+import { render } from "react-dom";
 
 function Home(props) {
+  const data = [
+    {
+      habits: ["one", "two", "three"],
+    },
+    // {
+    //   habits: ["one", "two", "three"],
+    // },
+    // {
+    //   habits: ["one", "two", "three"],
+    // },
+  ];
+
+  const renderItem = ({ item }) => <HabitStackView habits={data} />;
+
   // the HomeHeaderView is for testing rn
   return (
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
         <HomeHeaderView style={styles.header} />
-        <HabitStackView habits={["one", "two", "three"]} />
+        <FlatList data={data} renderItem={renderItem} />
       </View>
       <TouchableOpacity
         style={{
