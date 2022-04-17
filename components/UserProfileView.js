@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import { FONT } from "../constants/font.js";
 import { COLORS } from "../constants/colors.js";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -15,8 +21,8 @@ const UserProfileView = () => {
   const containerStyle = {
     backgroundColor: "white",
     padding: 20,
-    flex: 0.2,
-    width: 330,
+    // flex: 0.2,
+    width: 370,
     // alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
@@ -28,7 +34,7 @@ const UserProfileView = () => {
     setVisible(true);
   };
 
-  console.log(data);
+  // console.log(data);
 
   useEffect(() => {
     // fetch('https://raw.githubusercontent.com/adhithiravi/React-Hooks-Examples/master/testAPI.json')
@@ -61,8 +67,40 @@ const UserProfileView = () => {
           Alert.alert("Modal has been closed.");
         }}
       >
-        <Text style={FONT.h1b}>Edit Profile</Text>
-        <Text>test</Text>
+        <Text
+          style={{
+            fontSize: 36,
+            fontFamily: "NotoSans_700Bold",
+            marginBottom: 15,
+          }}
+        >
+          Edit Profile
+        </Text>
+        <View style={styles.modalDivider}></View>
+        <View style={{ flexDirection: "row" }}>
+          <View>
+            <Text style={FONT.p1}>Username</Text>
+            <Text style={FONT.p1}>Name</Text>
+            <Text style={FONT.p1}>Bio</Text>
+          </View>
+
+          <View style={{ marginLeft: 20 }}>
+            <TextInput style={FONT.p1} size={30} placeholder="Username" />
+
+            <TextInput style={FONT.p1} size={30} placeholder="Name" />
+
+            <TextInput style={FONT.p1} size={30} placeholder="Bio" />
+          </View>
+        </View>
+        <View style={{ flexDirection: "row-reverse" }}>
+          <TouchableOpacity
+            onPress={() => {
+              setVisible(false);
+            }}
+          >
+            <Text style={FONT.p2}>Done</Text>
+          </TouchableOpacity>
+        </View>
       </Modal>
 
       <View style={styles.nameText}>
@@ -91,11 +129,20 @@ const styles = StyleSheet.create({
     width: 279,
     height: 2,
     backgroundColor: COLORS.secondary,
+    zIndex: -1,
   },
+  modalDivider: {
+    width: 279,
+    height: 2,
+    backgroundColor: COLORS.tertiary,
+    marginBottom: 15,
+  },
+
   textBox: {
     width: 225,
     paddingTop: 10,
     paddingBottom: 10,
+    zIndex: -1,
   },
   nameText: {
     marginBottom: 10,

@@ -16,8 +16,8 @@ import { COLORS } from "../constants/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import HabitStackView from "../components/HabitStackView.js";
 import { render } from "react-dom";
-import * as React from 'react';
-import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
+import * as React from "react";
+import { Modal, Portal, Text, Button, Provider } from "react-native-paper";
 
 function Home(props) {
   const [visible, setVisible] = React.useState(false);
@@ -47,22 +47,43 @@ function Home(props) {
     setVisible(false);
     setAddingHabit(false);
     setAddingStack(false);
-  }
-  const containerStyle = {backgroundColor: 'white', padding: 20};
+  };
+  const containerStyle = { backgroundColor: "white", padding: 20 };
   // the HomeHeaderView is for testing rn
   return (
     <SafeAreaView style={styles.safeContainer}>
       <Provider>
         <Portal>
-          <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-            {!(addingHabit || addingStack) ? <StackChooser setAddingStack={setAddingStack} setAddingHabit={setAddingHabit}/> : null}
-            {addingHabit && !addingStack ? <HabitAdder setAddingStack={setAddingStack} setAddingHabit={setAddingHabit} /> : null}
-            {addingStack && !addingHabit ? <StackAdder setAddingStack={setAddingStack} setAddingHabit={setAddingHabit} /> : null}
+          <Modal
+            visible={visible}
+            onDismiss={hideModal}
+            contentContainerStyle={containerStyle}
+          >
+            {!(addingHabit || addingStack) ? (
+              <StackChooser
+                setAddingStack={setAddingStack}
+                setAddingHabit={setAddingHabit}
+              />
+            ) : null}
+            {addingHabit && !addingStack ? (
+              <HabitAdder
+                setAddingStack={setAddingStack}
+                setAddingHabit={setAddingHabit}
+              />
+            ) : null}
+            {addingStack && !addingHabit ? (
+              <StackAdder
+                setAddingStack={setAddingStack}
+                setAddingHabit={setAddingHabit}
+              />
+            ) : null}
           </Modal>
         </Portal>
         <ScrollView style={styles.container}>
           <HomeHeaderView style={styles.header} />
-          {data.map((item, i) => <HabitStackView key={i} habits={item.habits} />)}
+          {data.map((item, i) => (
+            <HabitStackView key={i} habits={item.habits} />
+          ))}
         </ScrollView>
         <TouchableOpacity onPress={showModal} style={styles.addButton}>
           <View style={styles.add}>
@@ -82,7 +103,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 30,
-    flexDirection: 'column',
+    flexDirection: "column",
   },
   header: {
     flex: 1,
@@ -100,11 +121,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   addButton: {
-    position: 'absolute',
-    right: 10,
-    bottom: 10
-  }
+    position: "absolute",
+    right: 30,
+    bottom: 30,
+  },
 });
 
 export default Home;
