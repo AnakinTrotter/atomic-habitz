@@ -1,9 +1,11 @@
 import {
+  ScrollView,
   StyleSheet,
   SafeAreaView,
   View,
   TextInput,
   TouchableOpacity,
+  FlatList,
 } from "react-native";
 
 import HomeHeaderView from "../components/HomeHeaderView";
@@ -12,6 +14,8 @@ import StackAdder from "../components/StackAdder";
 import HabitAdder from "../components/HabitAdder";
 import { COLORS } from "../constants/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import HabitStackView from "../components/HabitStackView.js";
+import { render } from "react-dom";
 import * as React from 'react';
 import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
 
@@ -19,6 +23,24 @@ function Home(props) {
   const [visible, setVisible] = React.useState(false);
   const [addingHabit, setAddingHabit] = React.useState(false);
   const [addingStack, setAddingStack] = React.useState(false);
+
+  const data = [
+    {
+      habits: ["one", "two", "three"],
+      name: "One",
+    },
+    {
+      habits: ["one", "two", "three"],
+      name: "Two",
+    },
+    {
+      habits: ["one", "two", "three"],
+      name: "Three",
+    },
+  ];
+
+  const renderItem = ({ item }) => <HabitStackView habits={item.habits} />;
+  // const renderItem = ({item}) => <Text>{item.name}</Text>
 
   const showModal = () => setVisible(true);
   const hideModal = () => {
@@ -30,9 +52,6 @@ function Home(props) {
   // the HomeHeaderView is for testing rn
   return (
     <SafeAreaView style={styles.safeContainer}>
-      <View style={styles.container}>
-        <HomeHeaderView style={styles.header} />
-      </View>
       <Provider>
         <Portal>
           <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
@@ -40,12 +59,16 @@ function Home(props) {
             {addingHabit && !addingStack ? <HabitAdder setAddingStack={setAddingStack} setAddingHabit={setAddingHabit} /> : null}
             {addingStack && !addingHabit ? <StackAdder setAddingStack={setAddingStack} setAddingHabit={setAddingHabit} /> : null}
           </Modal>
-          <TouchableOpacity onPress={showModal} style={styles.addButton}>
-            <View style={styles.add}>
-              <Icon size={70} style={{ color: COLORS.primary }} name="plus" />
-            </View>
-          </TouchableOpacity>
         </Portal>
+        <ScrollView style={styles.container}>
+          <HomeHeaderView style={styles.header} />
+          {data.map((item, i) => <HabitStackView key={i} habits={item.habits} />)}
+        </ScrollView>
+        <TouchableOpacity onPress={showModal} style={styles.addButton}>
+          <View style={styles.add}>
+            <Icon size={70} style={{ color: COLORS.primary }} name="plus" />
+          </View>
+        </TouchableOpacity>
       </Provider>
     </SafeAreaView>
   );
@@ -77,7 +100,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-
   addButton: {
     position: 'absolute',
     right: 10,
