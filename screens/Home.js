@@ -1,4 +1,5 @@
 import {
+  ScrollView,
   StyleSheet,
   SafeAreaView,
   View,
@@ -11,31 +12,38 @@ import {
 import HomeHeaderView from "../components/HomeHeaderView.js";
 import { COLORS } from "../constants/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import HabitStackView from "../components/HabitCardView.js";
+import HabitStackView from "../components/HabitStackView.js";
 import { render } from "react-dom";
 
 function Home(props) {
   const data = [
     {
       habits: ["one", "two", "three"],
+      name: "One",
     },
-    // {
-    //   habits: ["one", "two", "three"],
-    // },
-    // {
-    //   habits: ["one", "two", "three"],
-    // },
+    {
+      habits: ["one", "two", "three"],
+      name: "Two",
+    },
+    {
+      habits: ["one", "two", "three"],
+      name: "Three",
+    },
   ];
 
-  const renderItem = ({ item }) => <HabitStackView habits={data} />;
+  const renderItem = ({ item }) => <HabitStackView habits={item.habits} />;
+  // const renderItem = ({item}) => <Text>{item.name}</Text>
 
   // the HomeHeaderView is for testing rn
   return (
     <SafeAreaView style={styles.safeContainer}>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <HomeHeaderView style={styles.header} />
-        <FlatList data={data} renderItem={renderItem} />
-      </View>
+        <HabitStackView habits={data[0].habits} />
+        <HabitStackView habits={data[0].habits} />
+        <HabitStackView habits={data[0].habits} />
+        {/* <FlatList style={{flex: 1}} data={data} renderItem={renderItem} keyExtractor={(item, index) => index.toString()} /> */}
+      </ScrollView>
       <TouchableOpacity
         style={{
           height: 80,
@@ -66,8 +74,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 30,
-    justifyContent: "flex-start",
-    alignItems: "flex-start"
   },
   header: {
     flex: 1,
