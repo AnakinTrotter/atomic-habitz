@@ -1,3 +1,3 @@
 export const AUTHENTICATION = {
-    loggedIn: true,
-  }
+  loggedIn: false,
+};

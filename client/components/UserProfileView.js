@@ -20,6 +20,7 @@ const UserProfileView = () => {
   const hideModal = () => setVisible(false);
   const containerStyle = {
     backgroundColor: "white",
+    borderRadius: 10,
     padding: 20,
     // flex: 0.2,
     width: 370,

@@ -8,19 +8,19 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import { COLORS } from "../constants/colors";
 import { FONT } from "../constants/font";
- 
-export default function Login() {
+
+export default function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
- 
-  return (
-    <View style={styles.container}>
 
-      <Text style={ [FONT.h1b, styles.title] }>Habit Stack</Text>
- 
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={[FONT.h1b, styles.title]}>Habit Stack</Text>
+
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
@@ -29,7 +29,7 @@ export default function Login() {
           onChangeText={(username) => setUsername(username)}
         />
       </View>
- 
+
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
@@ -39,48 +39,53 @@ export default function Login() {
           onChangeText={(password) => setPassword(password)}
         />
       </View>
- 
-      <TouchableOpacity style={styles.loginBtn}>
+
+      <TouchableOpacity
+        style={styles.loginBtn}
+        onPress={() => {
+          props.navigation.navigate("Tabs");
+        }}
+      >
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
- 
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0.85,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
- 
+
   image: {
     marginBottom: 40,
   },
- 
+
   inputView: {
     backgroundColor: COLORS.primary,
     borderRadius: 30,
     width: "70%",
     height: 45,
     marginBottom: 20,
- 
+
     alignItems: "center",
   },
- 
+
   TextInput: {
     height: 50,
     flex: 1,
     padding: 10,
     marginLeft: 20,
   },
- 
+
   forgot_button: {
     height: 30,
     marginBottom: 30,
   },
- 
+
   loginBtn: {
     width: "80%",
     borderRadius: 25,
@@ -91,6 +96,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.tertiary,
   },
   title: {
-      paddingVertical: 70
-  }
+    paddingVertical: 70,
+  },
 });
