@@ -16,8 +16,8 @@ import { COLORS } from "../constants/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import HabitStackView from "../components/HabitStackView.js";
 import { render } from "react-dom";
-import * as React from 'react';
-import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
+import * as React from "react";
+import { Modal, Portal, Text, Button, Provider } from "react-native-paper";
 
 function Home(props) {
   const [visible, setVisible] = React.useState(false);
@@ -26,20 +26,51 @@ function Home(props) {
 
   const data = [
     {
-      habits: ["one", "two", "three"],
       name: "One",
+      streak: 10,
+      stacked_habits: [
+        {
+          name: "Walk a mile"
+        },
+        {
+          name: "Read a book"
+        },
+        {
+          name: "Go to school"
+        },
+      ]
     },
     {
-      habits: ["one", "two", "three"],
       name: "Two",
+      streak: 3,
+      stacked_habits: [
+        {
+          name: "Walk a mile"
+        },
+        {
+          name: "Read a book"
+        }
+      ]
     },
     {
-      habits: ["one", "two", "three"],
       name: "Three",
+      streak: 8,
+      stacked_habits: [
+        {
+          name: "Walk a mile"
+        },
+        {
+          name: "Read a book"
+        },
+        {
+          name: "Go to school"
+        },
+        {
+          name: "Manifest some bitches"
+        }
+      ]
     },
   ];
-
-  const renderItem = ({ item }) => <HabitStackView habits={item.habits} />;
   // const renderItem = ({item}) => <Text>{item.name}</Text>
 
   const showModal = () => setVisible(true);
@@ -47,22 +78,51 @@ function Home(props) {
     setVisible(false);
     setAddingHabit(false);
     setAddingStack(false);
-  }
-  const containerStyle = {backgroundColor: 'white', padding: 20};
+  };
+  const containerStyle = { 
+    backgroundColor: "white", 
+    padding: 20,
+    margin: 20,
+    borderRadius: 15,
+    paddingVertical: 30
+  };
   // the HomeHeaderView is for testing rn
   return (
     <SafeAreaView style={styles.safeContainer}>
       <Provider>
         <Portal>
-          <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-            {!(addingHabit || addingStack) ? <StackChooser setAddingStack={setAddingStack} setAddingHabit={setAddingHabit}/> : null}
-            {addingHabit && !addingStack ? <HabitAdder setAddingStack={setAddingStack} setAddingHabit={setAddingHabit} /> : null}
-            {addingStack && !addingHabit ? <StackAdder setAddingStack={setAddingStack} setAddingHabit={setAddingHabit} /> : null}
+          <Modal
+            animated
+            animationType="slide"
+            visible={visible}
+            onDismiss={hideModal}
+            contentContainerStyle={containerStyle}
+          >
+            {!(addingHabit || addingStack) ? (
+              <StackChooser
+                setAddingStack={setAddingStack}
+                setAddingHabit={setAddingHabit}
+              />
+            ) : null}
+            {addingHabit && !addingStack ? (
+              <HabitAdder
+                setAddingStack={setAddingStack}
+                setAddingHabit={setAddingHabit}
+              />
+            ) : null}
+            {addingStack && !addingHabit ? (
+              <StackAdder
+                setAddingStack={setAddingStack}
+                setAddingHabit={setAddingHabit}
+              />
+            ) : null}
           </Modal>
         </Portal>
         <ScrollView style={styles.container}>
           <HomeHeaderView style={styles.header} />
-          {data.map((item, i) => <HabitStackView key={i} habits={item.habits} />)}
+          {data.map((item, i) => (
+            <HabitStackView key={i} streak={item.streak} title={item.name} habits={item.stacked_habits} />
+          ))}
         </ScrollView>
         <TouchableOpacity onPress={showModal} style={styles.addButton}>
           <View style={styles.add}>
@@ -82,7 +142,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 30,
-    flexDirection: 'column',
+    flexDirection: "column",
   },
   header: {
     flex: 1,
@@ -93,6 +153,7 @@ const styles = StyleSheet.create({
     width: 80,
     borderRadius: 80,
     backgroundColor: "white",
+    elevation: 8,
     shadowColor: "#171717",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
@@ -100,11 +161,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   addButton: {
-    position: 'absolute',
-    right: 10,
-    bottom: 10
-  }
+    position: "absolute",
+    right: 30,
+    bottom: 30,
+  },
 });
 
 export default Home;
