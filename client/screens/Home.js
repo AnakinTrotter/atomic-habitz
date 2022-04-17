@@ -18,59 +18,68 @@ import HabitStackView from "../components/HabitStackView.js";
 import { render } from "react-dom";
 import * as React from "react";
 import { Modal, Portal, Text, Button, Provider } from "react-native-paper";
+import { getUserStacks } from "../utils/StackQueryParser";
 
 function Home(props) {
   const [visible, setVisible] = React.useState(false);
   const [addingHabit, setAddingHabit] = React.useState(false);
   const [addingStack, setAddingStack] = React.useState(false);
+  const [data, setData] = React.useState([]);
 
-  const data = [
-    {
-      name: "One",
-      streak: 10,
-      stacked_habits: [
-        {
-          name: "Walk a mile"
-        },
-        {
-          name: "Read a book"
-        },
-        {
-          name: "Go to school"
-        },
-      ]
-    },
-    {
-      name: "Two",
-      streak: 3,
-      stacked_habits: [
-        {
-          name: "Walk a mile"
-        },
-        {
-          name: "Read a book"
-        }
-      ]
-    },
-    {
-      name: "Three",
-      streak: 8,
-      stacked_habits: [
-        {
-          name: "Walk a mile"
-        },
-        {
-          name: "Read a book"
-        },
-        {
-          name: "Go to school"
-        },
-        {
-          name: "Manifest some bitches"
-        }
-      ]
-    },
-  ];
+  React.useEffect(async () => {
+    const newData = await getUserStacks(1);
+    if (newData && newData.length > 0) {
+      setData(await getUserStacks(1));
+    }
+  }, [])
+
+  // const data = [
+  //   {
+  //     name: "One",
+  //     streak: 10,
+  //     stacked_habits: [
+  //       {
+  //         name: "Walk a mile"
+  //       },
+  //       {
+  //         name: "Read a book"
+  //       },
+  //       {
+  //         name: "Go to school"
+  //       },
+  //     ]
+  //   },
+  //   {
+  //     name: "Two",
+  //     streak: 3,
+  //     stacked_habits: [
+  //       {
+  //         name: "Walk a mile"
+  //       },
+  //       {
+  //         name: "Read a book"
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     name: "Three",
+  //     streak: 8,
+  //     stacked_habits: [
+  //       {
+  //         name: "Walk a mile"
+  //       },
+  //       {
+  //         name: "Read a book"
+  //       },
+  //       {
+  //         name: "Go to school"
+  //       },
+  //       {
+  //         name: "Manifest some bitches"
+  //       }
+  //     ]
+  //   },
+  // ];
   // const renderItem = ({item}) => <Text>{item.name}</Text>
 
   const showModal = () => setVisible(true);

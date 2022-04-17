@@ -29,7 +29,7 @@ import { TouchableHighlight } from "react-native-gesture-handler";
 function HabitStackView(props) {
   const [expanded, setExpanded] = useState(false);
   const stackHeight = useState(new Animated.Value(styles.card.height + 5 * (props.habits.length + 1)))[0];
-  const animationTime = 1000;
+  const animationTime = 500;
 
   useEffect(() => {
     if (expanded) {
