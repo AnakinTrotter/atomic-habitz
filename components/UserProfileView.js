@@ -4,10 +4,30 @@ import { FONT } from "../constants/font.js";
 import { COLORS } from "../constants/colors.js";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ProfileTreeView from "./ProfileTreeView.js";
+import { Modal, Portal, Button, Provider } from "react-native-paper";
 
 const UserProfileView = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [visible, setVisible] = useState(false);
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+  const containerStyle = {
+    backgroundColor: "white",
+    padding: 20,
+    flex: 0.2,
+    width: 330,
+    // alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+  };
+
+  //onPress for Settings button
+  const onPress = () => {
+    // console.log("Settings pressed!");
+    setVisible(true);
+  };
+
   console.log(data);
 
   useEffect(() => {
@@ -28,9 +48,23 @@ const UserProfileView = () => {
   return (
     <View style={styles.container}>
       <Icon name="account-circle" color={COLORS.brown} size={96} />
-      <TouchableOpacity onPress={onPress} style={styles.settingsIcon}>
-        <Icon color="gray" name="cog" size={48} />
+      <TouchableOpacity onPress={showModal} style={styles.settingsIcon}>
+        <Icon color="gray" name="cog" size={45} />
       </TouchableOpacity>
+
+      <Modal
+        transparent={true}
+        visible={visible}
+        onDismiss={hideModal}
+        contentContainerStyle={containerStyle}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}
+      >
+        <Text style={FONT.h1b}>Edit Profile</Text>
+        <Text>test</Text>
+      </Modal>
+
       <View style={styles.nameText}>
         <Text style={FONT.h1b}>{data.name}</Text>
       </View>
@@ -43,13 +77,9 @@ const UserProfileView = () => {
         <Text style={FONT.p1b}>HIGHEST STREAK: {data.best}🔥</Text>
       </View>
       <View style={styles.divider}></View>
-      <ProfileTreeView />
+      {/* <ProfileTreeView /> */}
     </View>
   );
-};
-
-const onPress = () => {
-  console.log("Settings pressed!");
 };
 
 const styles = StyleSheet.create({
