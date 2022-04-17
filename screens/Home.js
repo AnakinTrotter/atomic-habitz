@@ -29,7 +29,7 @@ function Home(props) {
           <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
             <Text>Example Modal.  Click outside this area to dismiss.</Text>
           </Modal>
-          <TouchableOpacity onPress={showModal}>
+          <TouchableOpacity onPress={showModal} style={styles.pog}>
             <View style={styles.add}>
               <Icon size={70} style={{ color: COLORS.primary }} name="plus" />
             </View>
@@ -63,10 +63,15 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    alignSelf: "flex-end",
     alignItems: "center",
     justifyContent: "center",
   },
+
+  pog: {
+    position: 'absolute',
+    right: 10,
+    bottom: 10
+  }
 });
 
 export default Home;
