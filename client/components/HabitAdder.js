@@ -10,6 +10,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import HomeDateText from "./HomeDateText";
 import { FONT } from "../constants/font.js";
 import { COLORS } from "../constants/colors";
+import AppButton from "../components/AppButton";
 
 const styles = StyleSheet.create({
   inputSimpleBorder: {
@@ -30,6 +31,10 @@ const styles = StyleSheet.create({
     margin: 15
   }
 });
+
+function handleSubmit() {
+  console.log("Submit new habit.");
+}
 
 function HabitAdder({ setAddingHabit, setAddingStack }) {
   return (
@@ -60,6 +65,7 @@ function HabitAdder({ setAddingHabit, setAddingStack }) {
           size={30}
           placeholder="Stack To Add Habit To"
         />
+        <AppButton onPress={handleSubmit} title="Submit New Habit" />
       </View>
     </View>
   );

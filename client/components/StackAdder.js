@@ -11,6 +11,7 @@ import HomeDateText from "./HomeDateText";
 import { FONT } from "../constants/font.js";
 import { COLORS } from "../constants/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AppButton from "./AppButton";
 
 const styles = StyleSheet.create({
   inputSimpleBorder: {
@@ -31,6 +32,10 @@ const styles = StyleSheet.create({
     paddingVertical: 30
   }
 });
+
+function handleSubmit() {
+  console.log("Submit new stack.");
+}
 
 function StackCreator({ setAddingHabit, setAddingStack }) {
   return (
@@ -61,6 +66,7 @@ function StackCreator({ setAddingHabit, setAddingStack }) {
           size={30}
           placeholder="Time To Begin Stack"
         />
+        <AppButton onPress={handleSubmit} title="Submit New Habit" />
       </View>
     </View>
   );

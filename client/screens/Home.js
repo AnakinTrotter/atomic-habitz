@@ -79,8 +79,8 @@ function Home(props) {
     setAddingHabit(false);
     setAddingStack(false);
   };
-  const containerStyle = { 
-    backgroundColor: "white", 
+  const containerStyle = {
+    backgroundColor: "white",
     padding: 20,
     margin: 20,
     borderRadius: 15,
@@ -102,6 +102,7 @@ function Home(props) {
               <StackChooser
                 setAddingStack={setAddingStack}
                 setAddingHabit={setAddingHabit}
+                setVisible={setVisible}
               />
             ) : null}
             {addingHabit && !addingStack ? (
