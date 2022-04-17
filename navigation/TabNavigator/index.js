@@ -5,10 +5,11 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Home from "../../screens/Home";
 import Friends from "../../screens/Friends";
 import Profile from "../../screens/Profile";
+import Login from "../../screens/Login";
+import LoginToSee from "../../screens/LoginToSee";
+import { AUTHENTICATION } from "../../constants/authentication";
 import { COLORS } from "../../constants/colors";
 import CustomTabBar from "./CustomTabBar";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { View } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -51,9 +52,9 @@ const TabNavigator = () => {
       })}
       tabBar={(props) => <CustomTabBar {...props} />}
     >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Friends" component={Friends} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Home" component={AUTHENTICATION.loggedIn ? Home : LoginToSee} />
+      <Tab.Screen name="Friends" component={AUTHENTICATION.loggedIn ? Friends : LoginToSee} />
+      <Tab.Screen name="Profile" component={AUTHENTICATION.loggedIn ? Profile : Login} />
     </Tab.Navigator>
   );
 };
