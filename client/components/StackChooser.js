@@ -9,7 +9,7 @@ import AppButton from './AppButton';
 
 function StackChooser({ setAddingStack, setAddingHabit }) {
     return (
-        <View>
+        <View style={styles.container}>
             <Text style={ FONT.h1b }>Habit Stacker</Text>
             <AppButton onPress={() => {setAddingHabit(false); setAddingStack(true)}} title="Create a new stack" />
             <AppButton onPress={() => {setAddingHabit(true); setAddingStack(false)}} title="Stack a new habit" />
@@ -18,3 +18,10 @@ function StackChooser({ setAddingStack, setAddingHabit }) {
 }
 
 export default StackChooser;
+
+const styles = StyleSheet.create({
+    container: {
+      justifyContent: "center",
+      alignItems: "center"
+    }
+});

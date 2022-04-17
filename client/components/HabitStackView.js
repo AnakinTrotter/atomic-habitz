@@ -8,9 +8,11 @@ import {
   TouchableWithoutFeedback,
   Animated
 } from "react-native";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { COLORS } from "../constants/colors";
-import RCTSingelineTextInputNativeComponent from "react-native/Libraries/Components/TextInput/RCTSingelineTextInputNativeComponent";
+import { FONT } from "../constants/font";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 /**
  * DOCUMENTATION
@@ -85,12 +87,6 @@ function HabitCardView(props) {
   const topVal = useState(new Animated.Value(props.id * 5))[0];
   const opacityVal = useState(new Animated.Value(1))[0];
 
-  const cardStyle = {
-    opacity: 1 - props.id * 0.1,
-    top: props.id * 5,
-    left: props.id * 5,
-  }
-
   const animationTime = props.animationTime;
 
   useEffect(() => {
@@ -141,11 +137,20 @@ function HabitCardView(props) {
     }).start();
   };
 
-  // const cardStyle = props.offsetVals ? {
-  //   left: props.offsetVals?.leftVal || props.id * 5 ,
-  //   top: props.offsetVals?.topVal || props.id * 5,
-  //   opacity: props.offsetVals?.opacityVal || 1 - props.id * 0.1
-  // };
+  const textView = props.isBackground ?
+  (
+    <View style={styles.titleCard}>
+     <Text style={ FONT.p1 }>Test</Text>
+    </View>
+  ) : (
+    <View style={styles.titleCard}>
+      <Text style={ FONT.p1 }>Test</Text>
+      <View style={styles.streak}>
+        <Icon color="#FB8B23" name="fire" size={45} style={{marginEnd: -5}} />
+        <Text style={ FONT.p1 }>5</Text>
+      </View>
+    </View>
+  );
 
   return (
     <Animated.View
@@ -157,6 +162,7 @@ function HabitCardView(props) {
         top: topVal,
         opacity: opacityVal
       }}>
+      {textView}
     </Animated.View>
   );
 }
@@ -167,8 +173,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginLeft: 15,
-    marginTop: 15,
-    backgroundColor: "blue"
+    marginTop: 15
   },
   card: {
     width: 275,
@@ -178,11 +183,21 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
+    elevation: 8,
     left: 0,
     bottom: 0,
     right: 0,
     position: "absolute"
   },
+  titleCard: {
+    margin: 15,
+    justifyContent: "space-between"
+  },
+  streak: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center"
+  }
 });
 
 export default HabitStackView;

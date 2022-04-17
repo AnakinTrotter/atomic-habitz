@@ -48,13 +48,21 @@ function Home(props) {
     setAddingHabit(false);
     setAddingStack(false);
   };
-  const containerStyle = { backgroundColor: "white", padding: 20 };
+  const containerStyle = { 
+    backgroundColor: "white", 
+    padding: 20,
+    margin: 20,
+    borderRadius: 15,
+    paddingVertical: 30
+  };
   // the HomeHeaderView is for testing rn
   return (
     <SafeAreaView style={styles.safeContainer}>
       <Provider>
         <Portal>
           <Modal
+            animated
+            animationType="slide"
             visible={visible}
             onDismiss={hideModal}
             contentContainerStyle={containerStyle}
@@ -114,6 +122,7 @@ const styles = StyleSheet.create({
     width: 80,
     borderRadius: 80,
     backgroundColor: "white",
+    elevation: 8,
     shadowColor: "#171717",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
