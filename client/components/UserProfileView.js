@@ -19,7 +19,6 @@ const UserProfileView = () => {
     let route = URLS.base + 'api/users'
     let res = await fetch(route)
     let data = await res.json()
-    console.log(data)
     setData(data[0])
   }, []);
 
