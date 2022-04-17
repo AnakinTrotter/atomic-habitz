@@ -5,6 +5,7 @@ from django.db import models
 
 class User(models.Model):
     name = models.TextField()
+    desc = models.TextField(default="Hi! I like TREES!")
     password = models.TextField()  # bcrypt later lmao
 
 
