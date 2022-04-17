@@ -25,5 +25,6 @@ router.register(r'habits', views.HabitView, 'habit')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('api/auth/', include('habit_app.urls'))
 ]

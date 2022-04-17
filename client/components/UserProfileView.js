@@ -2,27 +2,25 @@ import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { FONT } from "../constants/font.js";
 import { COLORS } from "../constants/colors.js";
+import { URLS } from "../constants/urls.js";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ProfileTreeView from "./ProfileTreeView.js";
 
 const UserProfileView = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  console.log(data);
 
-  useEffect(() => {
-    // fetch('https://raw.githubusercontent.com/adhithiravi/React-Hooks-Examples/master/testAPI.json')
-    //   .then((response) => response.json())
-    //   .then((json) => setData(json))
-    //   .catch((error) => console.error(error))
-    //   .finally(() => setLoading(false));
+  useEffect(async () => {
     let testData = {
-      name: "xXJams69Xx",
-      desc: "I like to play Minecraft bedwars with my friends!",
-      best: 420,
-    };
-    setData(testData);
-    setLoading(false);
+      name: 'pog',
+      desc: 'poggers',
+      best: 420
+    }
+    let route = URLS.base + 'api/users'
+    let res = await fetch(route)
+    let data = await res.json()
+    console.log(data)
+    setData(data[0])
   }, []);
 
   return (
@@ -40,7 +38,7 @@ const UserProfileView = () => {
       </View>
       <View style={styles.divider}></View>
       <View style={styles.textBox}>
-        <Text style={FONT.p1b}>HIGHEST STREAK: {data.best}🔥</Text>
+        <Text style={FONT.p1b}>HIGHEST STREAK: 0 🔥</Text>
       </View>
       <View style={styles.divider}></View>
       <ProfileTreeView />
