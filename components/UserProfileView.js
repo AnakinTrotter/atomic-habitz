@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import { FONT } from '../constants/font.js'
 import { COLORS } from '../constants/colors.js'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import ProfileTreeView from './ProfileTreeView.js'
 
 const UserProfileView = () => {
     const [isLoading, setLoading] = useState(true);
@@ -26,8 +27,10 @@ const UserProfileView = () => {
 
     return (
         <View style={styles.container}>
-            <Icon style={styles.settingsIcon} color='gray' name='cog'size='48' />
             <Icon name='account-circle' color={COLORS.brown} size='96' />
+            <TouchableOpacity onPress={onPress} style={styles.settingsIcon}>
+                <Icon color='gray' name='cog' size='48' />
+            </TouchableOpacity>
             <View style={styles.nameText}>
                 <Text style={FONT.h1b}>{data.name}</Text>
             </View>
@@ -40,8 +43,13 @@ const UserProfileView = () => {
                 <Text style={FONT.p1b}>HIGHEST STREAK: {data.best}🔥</Text>
             </View>
             <View style={styles.divider}></View>
+            <ProfileTreeView />
         </View>
     );
+}
+
+const onPress = () => {
+    console.log('Settings pressed!');
 }
 
 const styles = StyleSheet.create({
