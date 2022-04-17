@@ -12,5 +12,10 @@ export const FONT = {
   p1: {
     fontSize: 18,
     fontFamily: "NotoSans_400Regular",
+  },
+
+  p1b: {
+    fontSize: 18,
+    fontFamily: "NotoSans_700Bold",
   }
 };
