@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .serializers import *
 from rest_framework import viewsets      
 from .models import *
+import json
 
 class UserView(viewsets.ModelViewSet):  
     serializer_class = UserSerializer   
@@ -18,9 +19,11 @@ class HabitView(viewsets.ModelViewSet):
 
 def login(request):
     if request.method == 'POST':
-        print(request.POST)
-        if 'username' in request.POST and 'password' in request.POST:
-            user_obj = User.objects.filter(name=request.POST['username'])
-            if len(user_obj) > 0 and user_obj[0].password == request.POST['password']:
+        print(request.body)
+        post_data = json.loads(request.body.decode('utf-8'))
+        print(post_data)
+        if 'username' in post_data and 'password' in post_data:
+            user_obj = User.objects.filter(name=post_data['username'])
+            if len(user_obj) > 0 and user_obj[0].password == post_data['password']:
                 return JsonResponse({'id': f'{user_obj[0].id}'})
     return JsonResponse({'error': 'user not found'})
