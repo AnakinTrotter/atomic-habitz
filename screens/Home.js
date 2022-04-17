@@ -8,7 +8,10 @@ import {
   FlatList,
 } from "react-native";
 
-import HomeHeaderView from "../components/HomeHeaderView.js";
+import HomeHeaderView from "../components/HomeHeaderView";
+import StackChooser from "../components/StackChooser";
+import StackAdder from "../components/StackAdder";
+import HabitAdder from "../components/HabitAdder";
 import { COLORS } from "../constants/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import HabitStackView from "../components/HabitStackView.js";
@@ -18,6 +21,8 @@ import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
 
 function Home(props) {
   const [visible, setVisible] = React.useState(false);
+  const [addingHabit, setAddingHabit] = React.useState(false);
+  const [addingStack, setAddingStack] = React.useState(false);
 
   const data = [
     {
@@ -38,7 +43,11 @@ function Home(props) {
   // const renderItem = ({item}) => <Text>{item.name}</Text>
 
   const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
+  const hideModal = () => {
+    setVisible(false);
+    setAddingHabit(false);
+    setAddingStack(false);
+  }
   const containerStyle = {backgroundColor: 'white', padding: 20};
   // the HomeHeaderView is for testing rn
   return (
@@ -46,7 +55,9 @@ function Home(props) {
       <Provider>
         <Portal>
           <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-            <Text>Example Modal.  Click outside this area to dismiss.</Text>
+            {!(addingHabit || addingStack) ? <StackChooser setAddingStack={setAddingStack} setAddingHabit={setAddingHabit}/> : null}
+            {addingHabit && !addingStack ? <HabitAdder setAddingStack={setAddingStack} setAddingHabit={setAddingHabit} /> : null}
+            {addingStack && !addingHabit ? <StackAdder setAddingStack={setAddingStack} setAddingHabit={setAddingHabit} /> : null}
           </Modal>
         </Portal>
         <ScrollView style={styles.container}>
