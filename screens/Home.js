@@ -66,6 +66,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 30,
+    justifyContent: "flex-start",
+    alignItems: "flex-start"
   },
   header: {
     flex: 1,

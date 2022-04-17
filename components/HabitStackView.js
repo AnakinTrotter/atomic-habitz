@@ -4,10 +4,10 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   useWindowDimensions,
+  TouchableWithoutFeedback
 } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { COLORS } from "../constants/colors";
 import RCTSingelineTextInputNativeComponent from "react-native/Libraries/Components/TextInput/RCTSingelineTextInputNativeComponent";
 
@@ -25,23 +25,26 @@ import RCTSingelineTextInputNativeComponent from "react-native/Libraries/Compone
  */
 function HabitStackView(props) {
   const [expanded, setExpanded] = useState(false);
+  
+  let habitStackHeight = styles.card.height + 5 * (props.habits.length + 1);
+  // let habitStackHeight = styles.card.height + 5 * (props.habits.length + 1);
+  if (expanded) {
+    habitStackHeight = styles.card.height * (props.habits.length + 1) + 5 * (props.habits.length + 1);
+  }
 
   const tapHandler = () => {
-    console.log("OAEIHFAOIWHFOIAHOIFAHOGI");
     setExpanded(!expanded);
   };
 
   const createHabitStack = () => {
     return props.habits.map((h, i) => {
-      const isBackground = i !== 0;
-
       return (
         <HabitCardView
           expanded={expanded}
           key={i}
-          isBackground={isBackground}
-          id={i}
-          zIndex={props.habits.length - i}
+          isBackground={true}
+          id={i + 1}
+          zIndex={props.habits.length - i - 1}
         />
       );
     });
@@ -49,7 +52,10 @@ function HabitStackView(props) {
 
   return (
     <TouchableWithoutFeedback onPress={tapHandler}>
-      <View style={{ ...styles.container }}>{createHabitStack()}</View>
+      <View style={{...styles.container, height: habitStackHeight}}>
+          <HabitCardView expanded={expanded} id={0} zIndex={props.habits.length + 1}/>
+        {createHabitStack()}
+      </View>
     </TouchableWithoutFeedback>
   );
 }
@@ -57,16 +63,14 @@ function HabitStackView(props) {
 HabitStackView.defaultProps = {
   zIndex: 1,
   opacity: 1.0,
+  id: 0
 };
 
 function HabitCardView(props) {
-  const window = useWindowDimensions();
-  console.log(window.width);
   const cardStyle = !props.expanded
     ? {
         opacity: 1 - props.id * 0.1,
         top: props.id * 5,
-        left: props.id * 5 - window.width / 2,
         left: props.id * 5,
       }
     : {
@@ -80,7 +84,6 @@ function HabitCardView(props) {
         ...styles.card,
         backgroundColor: props.isBackground ? COLORS.primary : "#F6F6F6",
         zIndex: props.zIndex,
-        position: "absolute",
         ...cardStyle,
       }}
     />
@@ -89,11 +92,12 @@ function HabitCardView(props) {
 
 const styles = StyleSheet.create({
   container: {
+    alignSelf: "baseline",
     justifyContent: "center",
     alignItems: "center",
-    flex: 1,
     marginLeft: 15,
-    marginTop: 20,
+    marginTop: 15,
+    backgroundColor: "blue"
   },
   card: {
     width: 275,
@@ -104,6 +108,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
     left: 0,
+    bottom: 0,
+    right: 0,
+    position: "absolute"
   },
 });
 
