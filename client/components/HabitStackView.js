@@ -29,7 +29,7 @@ import { TouchableHighlight } from "react-native-gesture-handler";
 function HabitStackView(props) {
   const [expanded, setExpanded] = useState(false);
   const stackHeight = useState(new Animated.Value(styles.card.height + 5 * (props.habits.length + 1)))[0];
-  const animationTime = 500;
+  const animationTime = 1000;
 
   useEffect(() => {
     if (expanded) {
@@ -61,6 +61,7 @@ function HabitStackView(props) {
           id={i + 1}
           zIndex={props.habits.length - i - 1}
           animationTime={animationTime}
+          name={h.name}
         />
       );
     });
@@ -69,7 +70,7 @@ function HabitStackView(props) {
   return (
     <TouchableWithoutFeedback onPress={tapHandler}>
       <Animated.View style={{...styles.container, height: stackHeight}}>
-          <HabitCardView expanded={expanded} id={0} zIndex={props.habits.length + 1}/>
+          <HabitCardView expanded={expanded} id={0} zIndex={props.habits.length + 1} title={props.title} streak={props.streak} />
         {createHabitStack()}
       </Animated.View>
     </TouchableWithoutFeedback>
@@ -140,14 +141,14 @@ function HabitCardView(props) {
   const textView = props.isBackground ?
   (
     <View style={styles.titleCard}>
-     <Text style={ FONT.p1 }>Test</Text>
+     <Text style={ FONT.p1 }>{props.name}</Text>
     </View>
   ) : (
     <View style={styles.titleCard}>
-      <Text style={ FONT.p1 }>Test</Text>
+      <Text style={ FONT.p1 }>{props.title}</Text>
       <View style={styles.streak}>
         <Icon color="#FB8B23" name="fire" size={45} style={{marginEnd: -5}} />
-        <Text style={ FONT.p1 }>5</Text>
+        <Text style={ FONT.p1 }>{props.streak || Math.floor(Math.random() * 10)}</Text>
       </View>
     </View>
   );

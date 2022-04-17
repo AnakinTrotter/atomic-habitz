@@ -26,20 +26,51 @@ function Home(props) {
 
   const data = [
     {
-      habits: ["one", "two", "three"],
       name: "One",
+      streak: 10,
+      stacked_habits: [
+        {
+          name: "Walk a mile"
+        },
+        {
+          name: "Read a book"
+        },
+        {
+          name: "Go to school"
+        },
+      ]
     },
     {
-      habits: ["one", "two", "three"],
       name: "Two",
+      streak: 3,
+      stacked_habits: [
+        {
+          name: "Walk a mile"
+        },
+        {
+          name: "Read a book"
+        }
+      ]
     },
     {
-      habits: ["one", "two", "three"],
       name: "Three",
+      streak: 8,
+      stacked_habits: [
+        {
+          name: "Walk a mile"
+        },
+        {
+          name: "Read a book"
+        },
+        {
+          name: "Go to school"
+        },
+        {
+          name: "Manifest some bitches"
+        }
+      ]
     },
   ];
-
-  const renderItem = ({ item }) => <HabitStackView habits={item.habits} />;
   // const renderItem = ({item}) => <Text>{item.name}</Text>
 
   const showModal = () => setVisible(true);
@@ -90,7 +121,7 @@ function Home(props) {
         <ScrollView style={styles.container}>
           <HomeHeaderView style={styles.header} />
           {data.map((item, i) => (
-            <HabitStackView key={i} habits={item.habits} />
+            <HabitStackView key={i} streak={item.streak} title={item.name} habits={item.stacked_habits} />
           ))}
         </ScrollView>
         <TouchableOpacity onPress={showModal} style={styles.addButton}>
