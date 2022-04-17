@@ -38,7 +38,7 @@ const UserProfileView = () => {
       </View>
       <View style={styles.divider}></View>
       <View style={styles.textBox}>
-        <Text style={FONT.p1b}>HIGHEST STREAK: 0 🔥</Text>
+        <Text style={FONT.p1b}>HIGHEST STREAK: 420 🔥</Text>
       </View>
       <View style={styles.divider}></View>
       <ProfileTreeView />
