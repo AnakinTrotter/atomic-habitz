@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   View,
   TextInput,
-  Text,
   TouchableOpacity,
   FlatList,
 } from "react-native";
@@ -14,8 +13,12 @@ import { COLORS } from "../constants/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import HabitStackView from "../components/HabitStackView.js";
 import { render } from "react-dom";
+import * as React from 'react';
+import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
 
 function Home(props) {
+  const [visible, setVisible] = React.useState(false);
+
   const data = [
     {
       habits: ["one", "two", "three"],
@@ -34,34 +37,28 @@ function Home(props) {
   const renderItem = ({ item }) => <HabitStackView habits={item.habits} />;
   // const renderItem = ({item}) => <Text>{item.name}</Text>
 
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+  const containerStyle = {backgroundColor: 'white', padding: 20};
   // the HomeHeaderView is for testing rn
   return (
     <SafeAreaView style={styles.safeContainer}>
-      <ScrollView style={styles.container}>
-        <HomeHeaderView style={styles.header} />
-        <HabitStackView habits={data[0].habits} />
-        <HabitStackView habits={data[0].habits} />
-        <HabitStackView habits={data[0].habits} />
-        {/* <FlatList style={{flex: 1}} data={data} renderItem={renderItem} keyExtractor={(item, index) => index.toString()} /> */}
-      </ScrollView>
-      <TouchableOpacity
-        style={{
-          height: 80,
-          width: 80,
-          borderRadius: 80,
-          justifyContent: "center",
-          marginBottom: 30,
-          marginRight: 30,
-          alignSelf: "flex-end",
-        }}
-        onPress={() => {
-          console.log("Button pressed");
-        }}
-      >
-        <View style={styles.add}>
-          <Icon size={70} style={{ color: COLORS.primary }} name="plus" />
-        </View>
-      </TouchableOpacity>
+      <Provider>
+        <Portal>
+          <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+            <Text>Example Modal.  Click outside this area to dismiss.</Text>
+          </Modal>
+        </Portal>
+        <ScrollView style={styles.container}>
+          <HomeHeaderView style={styles.header} />
+          {data.map((item, i) => <HabitStackView key={i} habits={item.habits} />)}
+        </ScrollView>
+        <TouchableOpacity onPress={showModal} style={styles.addButton}>
+          <View style={styles.add}>
+            <Icon size={70} style={{ color: COLORS.primary }} name="plus" />
+          </View>
+        </TouchableOpacity>
+      </Provider>
     </SafeAreaView>
   );
 }
@@ -74,6 +71,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 30,
+    flexDirection: 'column',
   },
   header: {
     flex: 1,
@@ -88,10 +86,14 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    alignSelf: "flex-end",
     alignItems: "center",
     justifyContent: "center",
   },
+  addButton: {
+    position: 'absolute',
+    right: 10,
+    bottom: 10
+  }
 });
 
 export default Home;
