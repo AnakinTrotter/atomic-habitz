@@ -5,9 +5,10 @@ import {
   TextInput,
   TouchableOpacity,
   useWindowDimensions,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Animated
 } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { COLORS } from "../constants/colors";
 import RCTSingelineTextInputNativeComponent from "react-native/Libraries/Components/TextInput/RCTSingelineTextInputNativeComponent";
 
@@ -25,12 +26,24 @@ import RCTSingelineTextInputNativeComponent from "react-native/Libraries/Compone
  */
 function HabitStackView(props) {
   const [expanded, setExpanded] = useState(false);
-  
-  let habitStackHeight = styles.card.height + 5 * (props.habits.length + 1);
-  // let habitStackHeight = styles.card.height + 5 * (props.habits.length + 1);
-  if (expanded) {
-    habitStackHeight = styles.card.height * (props.habits.length + 1) + 5 * (props.habits.length + 1);
-  }
+  const stackHeight = useState(new Animated.Value(styles.card.height + 5 * (props.habits.length + 1)))[0];
+  const animationTime = 500;
+
+  useEffect(() => {
+    if (expanded) {
+      Animated.spring(stackHeight, {
+        toValue: styles.card.height * (props.habits.length + 1) + 5 * (props.habits.length + 1),
+        duration: animationTime,
+        useNativeDriver: false
+      }).start();
+    } else {
+      Animated.spring(stackHeight, {
+        toValue: styles.card.height + 5 * (props.habits.length + 1),
+        duration: animationTime,
+        useNativeDriver: false
+      }).start();
+    }
+  }, [expanded])
 
   const tapHandler = () => {
     setExpanded(!expanded);
@@ -45,6 +58,7 @@ function HabitStackView(props) {
           isBackground={true}
           id={i + 1}
           zIndex={props.habits.length - i - 1}
+          animationTime={animationTime}
         />
       );
     });
@@ -52,10 +66,10 @@ function HabitStackView(props) {
 
   return (
     <TouchableWithoutFeedback onPress={tapHandler}>
-      <View style={{...styles.container, height: habitStackHeight}}>
+      <Animated.View style={{...styles.container, height: stackHeight}}>
           <HabitCardView expanded={expanded} id={0} zIndex={props.habits.length + 1}/>
         {createHabitStack()}
-      </View>
+      </Animated.View>
     </TouchableWithoutFeedback>
   );
 }
@@ -67,26 +81,83 @@ HabitStackView.defaultProps = {
 };
 
 function HabitCardView(props) {
-  const cardStyle = !props.expanded
-    ? {
-        opacity: 1 - props.id * 0.1,
-        top: props.id * 5,
-        left: props.id * 5,
-      }
-    : {
-        opacity: 1,
-        top: props.id * styles.card.height + props.id * 5,
-      };
+  const leftVal = useState(new Animated.Value(props.id * 5))[0];
+  const topVal = useState(new Animated.Value(props.id * 5))[0];
+  const opacityVal = useState(new Animated.Value(1))[0];
+
+  const cardStyle = {
+    opacity: 1 - props.id * 0.1,
+    top: props.id * 5,
+    left: props.id * 5,
+  }
+
+  const animationTime = props.animationTime;
+
+  useEffect(() => {
+    if (props.expanded) {
+      expandCard();
+    } else {
+      collapseCard();
+    }
+  }, [props.expanded]);
+
+  const expandCard = () => {
+    Animated.spring(leftVal, {
+      toValue: 0,
+      duration: animationTime / 2,
+      useNativeDriver: false
+    }).start();
+
+    Animated.spring(topVal, {
+      toValue: props.id * styles.card.height + props.id * 5,
+      duration: animationTime,
+      useNativeDriver: false
+    }).start();
+
+    Animated.spring(opacityVal, {
+      toValue: 1,
+      duration: animationTime,
+      useNativeDriver: false
+    }).start();
+  };
+
+  const collapseCard = () => {
+    Animated.spring(leftVal, {
+      toValue: props.id * 5,
+      duration: animationTime / 2,
+      useNativeDriver: false
+    }).start();
+
+    Animated.spring(topVal, {
+      toValue: props.id * 5,
+      duration: animationTime / 2,
+      useNativeDriver: false
+    }).start();
+
+    Animated.spring(opacityVal, {
+      toValue: 1 - props.id * 0.1,
+      duration: animationTime,
+      useNativeDriver: false
+    }).start();
+  };
+
+  // const cardStyle = props.offsetVals ? {
+  //   left: props.offsetVals?.leftVal || props.id * 5 ,
+  //   top: props.offsetVals?.topVal || props.id * 5,
+  //   opacity: props.offsetVals?.opacityVal || 1 - props.id * 0.1
+  // };
 
   return (
-    <View
+    <Animated.View
       style={{
         ...styles.card,
         backgroundColor: props.isBackground ? COLORS.primary : "#F6F6F6",
         zIndex: props.zIndex,
-        ...cardStyle,
-      }}
-    />
+        left: leftVal,
+        top: topVal,
+        opacity: opacityVal
+      }}>
+    </Animated.View>
   );
 }
 
