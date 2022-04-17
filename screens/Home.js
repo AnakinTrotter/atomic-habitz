@@ -7,6 +7,7 @@ import {
 } from "react-native";
 
 import HomeHeaderView from "../components/HomeHeaderView.js";
+import StackChooser from "../components/StackChooser.js";
 import { COLORS } from "../constants/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import * as React from 'react';
@@ -27,7 +28,7 @@ function Home(props) {
       <Provider>
         <Portal>
           <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-            <Text>Example Modal.  Click outside this area to dismiss.</Text>
+            <StackChooser />
           </Modal>
           <TouchableOpacity onPress={showModal} style={styles.addButton}>
             <View style={styles.add}>
