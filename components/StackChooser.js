@@ -1,21 +1,18 @@
 import React from 'react'
-import { View, Text, StyleSheet, FlatList, Modal, Portal, Provider, TouchableOpacity, Icon } from 'react-native'
+import { View, Text, StyleSheet, FlatList, Modal, Portal, Provider, TouchableOpacity, Icon, useEffect } from 'react-native'
 import HomeDateText from './HomeDateText';
 import { FONT } from '../constants/font.js';
 import { COLORS } from "../constants/colors";
+import { SafeAreaView } from 'react-native-safe-area-context';
+import AppButton from './AppButton';
 
 
-function StackChooser(props) {
-    const [visible, setVisible] = React.useState(false);
-
-    const showModal = () => setVisible(true);
-    const hideModal = () => setVisible(false);
-    const containerStyle = {backgroundColor: 'white', padding: 20};
+function StackChooser({ setAddingStack, setAddingHabit }) {
     return (
         <View>
-            <Text style={ FONT.h1b }>Add Habit To Stack</Text>
-            <FlatList>
-            </FlatList>
+            <Text style={ FONT.h1b }>Habit Stacker</Text>
+            <AppButton onPress={() => {setAddingHabit(false); setAddingStack(true)}} title="Create a new stack" />
+            <AppButton onPress={() => {setAddingHabit(true); setAddingStack(false)}} title="Stack a new habit" />
         </View>
     );
 }
