@@ -29,7 +29,7 @@ const UserProfileView = () => {
         <View style={styles.container}>
             <Icon name='account-circle' color={COLORS.brown} size='96' />
             <TouchableOpacity onPress={onPress} style={styles.settingsIcon}>
-                <Icon color='gray' name='cog' size='48' />
+                <Icon color='gray' name='cog' size={48} />
             </TouchableOpacity>
             <View style={styles.nameText}>
                 <Text style={FONT.h1b}>{data.name}</Text>

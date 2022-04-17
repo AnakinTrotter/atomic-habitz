@@ -10,13 +10,38 @@ import HomeHeaderView from "../components/HomeHeaderView.js";
 import { COLORS } from "../constants/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
+
+
+import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
+
+
 function Home(props) {
-  // the HomeHeaderView is for testing rn
+  const [visible, setVisible] = React.useState(false);
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+  const containerStyle = { backgroundColor: 'white', padding: 20 };
+
+
   return (
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
         <HomeHeaderView style={styles.header} />
       </View>
+
+
+      <Provider style='position: absolute'>
+        <Portal>
+          <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+            <Text>Example Modal.  Click outside this area to dismiss.</Text>
+          </Modal>
+        </Portal>
+        <Button style={{ marginTop: 30 }} onPress={showModal}>
+          Show
+        </Button>
+      </Provider>
+
+
       <TouchableOpacity
         onPress={() => {
           console.log("Button pressed");
