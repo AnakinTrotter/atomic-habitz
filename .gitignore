@@ -146,5 +146,8 @@ node_modules
 
 node_modules/**/*
 .expo/*
+client/.expo/*
 npm-debug.*
+
+
 
