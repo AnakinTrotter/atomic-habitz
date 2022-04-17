@@ -8,37 +8,23 @@ import {
   SafeAreaView,
 } from "react-native";
 
-import { COLORS } from "../constants/colors";
+import { FONT } from "../constants/font"
 
 const Friends = ({ navigation }) => {
-  const data = [
-    {
-      name: "Euglo",
-    },
-    {
-      name: "Anakin",
-    },
-    {
-      name: "Jakob",
-    },
-  ];
-
-  const Item = ({ name }) => (
-    <View style={styles.item}>
-      <Text>{name}</Text>
-    </View>
-  );
-
-  const renderItem = ({ item }) => <Item name={item.name} />;
-
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{ padding: 50 }}>Hello this is the friends screen :)</Text>
-      <FlatList
-        // style={{ backgroundColor: "red" }}
-        data={data}
-        renderItem={renderItem}
-      />
+      <View style={{ marginTop: 75 }}>
+        <Text style={FONT.h1}>Quotes of the day:</Text>
+      </View>
+      <View style={{width:275, marginTop: 50}}>
+        <Text style={FONT.p1}>The costs of your good habits are in the present. The costs of your bad habits are in the future.</Text>
+      </View>
+      <View style={{width:275, marginTop: 50}}>
+        <Text style={FONT.p1}>Goals are good for setting a direction, but systems are best for making progress.</Text>
+      </View>
+      <View style={{width:275, marginTop: 50}}>
+        <Text style={FONT.p1}>Every action you take is a vote for the type of person you wish to become.</Text>
+      </View>
     </SafeAreaView>
   );
 };
@@ -46,17 +32,8 @@ const Friends = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
-    // alignItems: "center",
-    // justifyContent: "center",
-  },
-
-  item: {
-    backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
+    alignItems: 'center',
+  }
 });
 
 export default Friends;
